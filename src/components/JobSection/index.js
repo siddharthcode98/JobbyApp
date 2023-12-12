@@ -14,6 +14,10 @@ import Loader from "react-loader-spinner";
 
 import Cookies from "js-cookie";
 
+import Location from "../Location";
+
+import "./index.css";
+
 const employmentTypesList = [
   { label: "fullTime", employmentTypeId: "FULLTIME" },
   { label: "partTime", employmentTypeId: "PARTTIME" },
@@ -26,6 +30,14 @@ const salaryRangesList = [
   { salaryRangeId: "2000000", label: "20LPA and Above" },
   { salaryRangeId: "3000000", label: "30LPA and Above" },
   { salaryRangeId: "4000000", label: "40LPA and Above" },
+];
+
+const AvailableLocationList = [
+  { locationId: "1", label: "Hyderabad" },
+  { locationId: "2", label: "Bangalore" },
+  { locationId: "3", label: "Chennai" },
+  { locationId: "4", label: "Delhi" },
+  { locationId: "5", label: "Mumbai" },
 ];
 
 const apiStatusConstants = {
@@ -42,6 +54,7 @@ class JobSection extends Component {
     employmentType: [],
     salaryRange: "",
     search: "",
+    locationList: [],
   };
   updatedEmploymentTypes = (category) => {
     const { employmentType } = this.state;
@@ -66,6 +79,20 @@ class JobSection extends Component {
   };
   onChangeUserInput = (event) => {
     this.setState({ search: event.target.value });
+  };
+  updateLocation = (location) => {
+    const { locationList } = this.state;
+    const isThere = locationList.includes(location);
+    if (isThere) {
+      const updatedLocationList = locationList.filter(
+        (item) => item !== location
+      );
+      this.setState({ locationList: updatedLocationList });
+    } else {
+      this.setState((prevState) => ({
+        locationList: [...prevState.locationList, location],
+      }));
+    }
   };
   userInputEnter = (event) => {
     const { search } = this.state;
@@ -117,8 +144,22 @@ class JobSection extends Component {
     </div>
   );
   successView = () => {
-    const { jobsList } = this.state;
+    let { jobsList, locationList } = this.state;
+
+    console.log(locationList);
+
     const emptyList = jobsList.length === 0;
+
+    let filteredList = [];
+
+    if (locationList.length > 0) {
+      filteredList = jobsList.filter((item) =>
+        locationList.includes(item.location)
+      );
+    } else {
+      filteredList = jobsList;
+    }
+
     return (
       <>
         {emptyList ? (
@@ -129,21 +170,29 @@ class JobSection extends Component {
             />
           </div>
         ) : (
-          <ul>
-            {jobsList.map((eachJob) => (
-              <JobItem jobDetails={eachJob} key={eachJob.id} />
-            ))}
-          </ul>
+          <div className="jobs-list-container">
+            <ul className="jobs-list">
+              {filteredList.map((eachJob) => (
+                <JobItem jobDetails={eachJob} key={eachJob.id} />
+              ))}
+            </ul>
+          </div>
         )}
       </>
     );
   };
   failureView = () => (
-    <div>
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-        alt="failure view"
-      />
+    <div className="failure-image-container">
+      <div className="failure-image">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+          alt="failure view"
+        />
+        <h1>Opps! Something went Wrong</h1>
+        <button className="retryBtn" onClick={() => this.getJobs}>
+          Retry
+        </button>
+      </div>
     </div>
   );
   ShowViews = () => {
@@ -163,51 +212,88 @@ class JobSection extends Component {
   render() {
     const { search } = this.state;
     return (
-      <div>
-        <UserProfileView />
-        <div>
-          <h1>Types of Employment</h1>
-          <ul>
-            {employmentTypesList.map((eachEmployment) => (
-              <EmploymentTypes
-                employment={eachEmployment}
-                key={eachEmployment.employmentTypeId}
-                updatedEmploymentTypes={this.updatedEmploymentTypes}
-              />
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h1>Types of Employment</h1>
-          <ul>
-            {salaryRangesList.map((eachSalary) => (
-              <SalaryRange
-                salaryItem={eachSalary}
-                key={eachSalary.salaryRangeId}
-                updatedSalaryRange={this.updatedSalaryRange}
-              />
-            ))}
-          </ul>
-        </div>
-        <div>
-          <div>
-            <input
-              type="search"
-              placeholder="search"
-              onChange={this.onChangeUserInput}
-              value={search}
-            />
-            <button
-              type="button"
-              data-testid="searchButton"
-              onClick={this.userInputEnter}
-            >
-              <BsSearch className="search-icon" />
-            </button>
+      <section>
+        <div className="jobs-section-container">
+          <div className="section-1">
+            <div id="mobile-search-bar">
+              <div className="search-bar-container">
+                <input
+                  type="search"
+                  placeholder="search"
+                  onChange={this.onChangeUserInput}
+                  value={search}
+                />
+                <button
+                  type="button"
+                  data-testid="searchButton"
+                  onClick={this.userInputEnter}
+                >
+                  <BsSearch className="search-icon" />
+                </button>
+              </div>
+            </div>
+            <UserProfileView />
+            <div className="filterContainer ">
+              <h1>Types of Employment</h1>
+              <ul>
+                {employmentTypesList.map((eachEmployment) => (
+                  <EmploymentTypes
+                    employment={eachEmployment}
+                    key={eachEmployment.employmentTypeId}
+                    updatedEmploymentTypes={this.updatedEmploymentTypes}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <div className="filterContainer ">
+              <h1>Types of Employment</h1>
+              <ul>
+                {salaryRangesList.map((eachSalary) => (
+                  <SalaryRange
+                    salaryItem={eachSalary}
+                    key={eachSalary.salaryRangeId}
+                    updatedSalaryRange={this.updatedSalaryRange}
+                  />
+                ))}
+              </ul>
+            </div>
+
+            <div className="filterContainer ">
+              <h1>Locations</h1>
+              <ul>
+                {AvailableLocationList.map((eachLocation) => (
+                  <Location
+                    details={eachLocation}
+                    key={eachLocation.locationId}
+                    updateLocation={this.updateLocation}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
-          <div>{this.ShowViews()}</div>
+          <div className="section-2">
+            <div id="large-search-bar">
+              <div className="search-bar-container">
+                <input
+                  type="search"
+                  placeholder="search"
+                  onChange={this.onChangeUserInput}
+                  value={search}
+                />
+                <button
+                  type="button"
+                  data-testid="searchButton"
+                  onClick={this.userInputEnter}
+                >
+                  <BsSearch className="search-icon" />
+                </button>
+              </div>
+            </div>
+            <>{this.ShowViews()}</>
+          </div>
         </div>
-      </div>
+      </section>
     );
   }
 }

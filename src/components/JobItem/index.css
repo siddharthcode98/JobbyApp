@@ -1,0 +1,48 @@
+.job-item {
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 1rem;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+  font-family: "Montserrat";
+}
+.job-item-section-1 {
+  display: flex;
+}
+.job-item-section-1 h1 {
+  margin-left: 10px;
+}
+@media screen and (max-width: 576px) {
+  .job-item-section-1 h1 {
+    font-size: 20px;
+  }
+  .job-item-section-1 img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+}
+.job-item-section-1 p {
+  margin-left: 10px;
+}
+.job-item-section-2 {
+  display: flex;
+  justify-content: space-between;
+}
+.job-item-section-2 div {
+  display: flex;
+}
+.location-salary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media screen and (max-width: 576px) {
+  .location-salary {
+    gap: 6px;
+    font-size: 15px;
+  }
+}

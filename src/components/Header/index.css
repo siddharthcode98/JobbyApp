@@ -1,0 +1,72 @@
+.nav-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #272727;
+  padding: 0 5rem 0 5rem;
+  height: 10vh;
+}
+@media screen and (max-width: 425px) {
+  .nav-container {
+    padding: 0 10px 0 10px;
+  }
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-bar ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0px;
+}
+.header-link {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Montserrat";
+  margin-right: 1rem;
+  font-weight: bold;
+}
+@media screen and (max-width: 425px) {
+  .header-link {
+    margin-right: 3px;
+    font-size: 15px;
+  }
+}
+/* .nav-bar button {
+  background-color: transparent;
+  border-style: none;
+} */
+.nav-bar button img {
+  width: 100px;
+}
+.logoBtn {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
+@media screen and (max-width: 425px) {
+  .nav-bar button img {
+    width: 60px;
+  }
+}
+.logoutBtn {
+  background-color: #6366f1;
+  color: #fff;
+  font-family: "Montserrat";
+  font-weight: bold;
+  border-radius: 8px;
+  border-style: none;
+  height: 30px;
+  width: 100px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+@media screen and (max-width: 425px) {
+  .logoutBtn {
+    width: 60px;
+  }
+}

@@ -6,7 +6,6 @@ const SalaryRange = (props) => {
   };
   return (
     <li>
-      <label htmlFor={salaryRangeId}>{label}</label>
       <input
         id={salaryRangeId}
         type="radio"
@@ -14,6 +13,7 @@ const SalaryRange = (props) => {
         name="user_salary"
         onChange={sendSalary}
       />
+      <label htmlFor={salaryRangeId}>{label}</label>
     </li>
   );
 };

@@ -1,0 +1,112 @@
+.jobs-section-container {
+  display: flex;
+}
+@media screen and (max-width: 576px) {
+  .jobs-section-container {
+    flex-direction: column;
+  }
+}
+.section-1 {
+  min-width: 30%;
+  box-sizing: border-box;
+  padding: 10px 10px 20px 10px;
+  position: sticky;
+  top: 0px;
+  height: 100vh;
+}
+@media screen and (max-width: 576px) {
+  .section-1 {
+    position: relative;
+  }
+}
+.section-1 h1 {
+  font-size: 1.5rem;
+  color: #fff;
+  font-family: "Montserrat";
+}
+@media screen and (max-width: 576px) {
+  .section-1 h1 {
+    font-size: 1rem;
+  }
+}
+.section-1 ul {
+  list-style: none;
+  padding: 0px;
+}
+.section-1 ul li {
+  color: #fff;
+  font-family: "Montserrat";
+}
+.section-1 div {
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.filterContainer {
+  border-top: 1px solid #ffff;
+}
+.jobs-list {
+  padding: 0px;
+  list-style: none;
+}
+.jobs-list-container {
+  box-sizing: border-box;
+}
+.search-bar-container {
+  width: 40%;
+  display: flex;
+}
+.search-bar-container input {
+  flex-grow: 1;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid #7e858e;
+  color: #fff;
+  outline: none;
+}
+.section-2 {
+  padding: 20px;
+  flex-grow: 1;
+}
+@media screen and (max-width: 576px) {
+  #large-search-bar {
+    display: none;
+  }
+}
+@media screen and (min-width: 577px) {
+  #mobile-search-bar {
+    display: none;
+  }
+}
+
+.loader-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.failure-image-container {
+  position: relative;
+  top: 20%;
+  font-family: Montserrat;
+}
+.failure-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.retryBtn {
+  background-color: #6366f1;
+  color: #fff;
+  font-family: "Montserrat";
+  font-weight: bold;
+  border-radius: 8px;
+  border-style: none;
+  height: 30px;
+  width: 100px;
+  box-sizing: border-box;
+}
+@media screen and (max-width: 576px) {
+  .failure-image {
+    width: 100%;
+  }
+}

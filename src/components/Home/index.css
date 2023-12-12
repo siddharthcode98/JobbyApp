@@ -3,3 +3,50 @@
   background-size: cover;
   height: 100vh;
 }
+@media screen and (max-width: 425px) {
+  .Home-page-container {
+    background-image: url("https://assets.ccbp.in/frontend/react-js/home-sm-bg.png");
+  }
+}
+.home-page-text {
+  padding: 2rem 0 0 5rem;
+  width: 30%;
+}
+@media screen and (min-width: 768px) {
+  .home-page-text {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 425px) {
+  .home-page-text {
+    width: 50%;
+    padding: 1rem 0 0 2rem;
+  }
+}
+.home-page-text h1 {
+  font-size: 5rem;
+  font-weight: bolder;
+  font-family: "Montserrat";
+  color: #fff;
+}
+@media screen and (max-width: 425px) {
+  .home-page-text h1 {
+    font-size: 2rem;
+  }
+}
+.home-page-text p {
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: "Montserrat";
+  color: #fff;
+}
+.findJobsBtn {
+  background-color: #6366f1;
+  color: #fff;
+  font-family: "Montserrat";
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 8px;
+  border-style: none;
+  width: 100px;
+}

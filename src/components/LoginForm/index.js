@@ -4,6 +4,8 @@ import { Redirect } from "react-router-dom";
 
 import Cookies from "js-cookie";
 
+import "./index.css";
+
 class LoginForm extends Component {
   state = { username: "", password: "", showError: false, errorMsg: "" };
 
@@ -51,33 +53,38 @@ class LoginForm extends Component {
       <Redirect to="/login" />;
     }
     return (
-      <div>
-        <div>
+      <div className="form-container">
+        <form onSubmit={this.onSubmitForm} className="form-element">
           <img
             src="https://assets.ccbp.in/frontend/react-js/logo-img.png "
             alt="website logo"
+            className="websiteLogo"
           />
-          <form onSubmit={this.onSubmitForm}>
-            <label htmlFor="username">USERNAME</label>
-            <input
-              id="username"
-              type="text"
-              onChange={this.onChangeUsername}
-              placeholder="Username"
-              value={username}
-            />
-            <label htmlFor="password">PASSWORD</label>
-            <input
-              id="password"
-              type="password"
-              onChange={this.onChangePassword}
-              placeholder="Password"
-              value={password}
-            />
-            <button type="submit">Login</button>
-            {showError && <p>{errorMsg}</p>}
-          </form>
-        </div>
+          <label htmlFor="username">USERNAME</label>
+
+          <input
+            id="username"
+            type="text"
+            onChange={this.onChangeUsername}
+            placeholder="Username"
+            value={username}
+          />
+
+          <label htmlFor="password">PASSWORD</label>
+
+          <input
+            id="password"
+            type="password"
+            onChange={this.onChangePassword}
+            placeholder="Password"
+            value={password}
+          />
+
+          <button type="submit" className="login-button">
+            Login
+          </button>
+          {showError && <p>{errorMsg}</p>}
+        </form>
       </div>
     );
   }

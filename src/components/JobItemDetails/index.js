@@ -4,6 +4,11 @@ import Cookies from "js-cookie";
 
 import Loader from "react-loader-spinner";
 
+import Header from "../Header";
+import { IoLocationSharp } from "react-icons/io5";
+import { FaSuitcase } from "react-icons/fa";
+import "./index.css";
+
 const apiStatusConstants = {
   initial: "INITIAL",
   success: "SUCCESS",
@@ -30,8 +35,9 @@ class JobItemDetails extends Component {
     skills: job_details.skills,
     lifeAtCompany: job_details.life_at_company,
     location: job_details.location,
-    packagePerAnnum: job_details.packagePerAnnum,
+    packagePerAnnum: job_details.package_per_annum,
     rating: job_details.rating,
+    title: job_details.title,
   });
   convertToCamelCase2 = (job_details) => ({
     companyLogoUrl: job_details.company_logo_url,
@@ -74,9 +80,11 @@ class JobItemDetails extends Component {
     }
   };
   LoadingView = () => {
-    <div className="loader-container" data-testid="loader">
-      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
-    </div>;
+    return (
+      <div className="loader-container-2" data-testid="loader">
+        <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+      </div>
+    );
   };
   successView = () => {
     const { SingleJobItemDetails, similarJobs } = this.state;
@@ -91,64 +99,110 @@ class JobItemDetails extends Component {
       location,
       packagePerAnnum,
       rating,
+      title,
     } = SingleJobItemDetails;
 
     return (
-      <>
-        <div>
-          <img src={companyLogoUrl} alt=" job details company logo" />
-          <a href={companyWebsiteUrl}>Visit</a>
-          <p>{jobDescription}</p>
-          <p>{employmentType}</p>
-          <ul>
-            {skills.map((skill) => (
-              <li key={skill.name}>
-                <img src={skill.image_url} alt={skill.name} />
-
-                <p>{skill.name}</p>
-              </li>
-            ))}
-          </ul>
-          <div>
-            <img src={lifeAtCompany.image_url} alt=" life at company" />
-            <h1>Life at Company</h1>
-            <p>{lifeAtCompany.description}</p>
+      <section className="single-job-container">
+        <div className="single-job-details">
+          <div className="single-job-1">
+            <img src={companyLogoUrl} alt=" job details company logo" />
+            <div className="title-rating">
+              <p>{title}</p>
+              <p>{rating}</p>
+            </div>
           </div>
-          <p>{location}</p>
-          <p>{packagePerAnnum}</p>
-          <p>{rating}</p>
+          <div className="single-job-2 ">
+            <div className="location-employment">
+              <IoLocationSharp />
+              <p>{location}</p>
+              <FaSuitcase />
+              <p>{employmentType}</p>
+            </div>
+
+            <p className="package">{packagePerAnnum}</p>
+          </div>
+          <div>
+            <div className="single-job-description">
+              <p>Description</p>
+              <a href={companyWebsiteUrl}>Visit</a>
+            </div>
+            <div>
+              <p>{jobDescription}</p>
+            </div>
+          </div>
+          <div>
+            <p>Skills</p>
+            <ul className="skill-container">
+              {skills.map((skill) => (
+                <li key={skill.name}>
+                  <img
+                    src={skill.image_url}
+                    alt={skill.name}
+                    className="skill-image"
+                  />
+
+                  <p>{skill.name}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="single-job-3">
+            <div>
+              <p>Life at Company</p>
+              <p>{lifeAtCompany.description}</p>
+            </div>
+            <img
+              src={lifeAtCompany.image_url}
+              alt=" life at company"
+              className="company-image"
+            />
+          </div>
         </div>
         <div>
-          <ul>
+          <p>Similar Jobs</p>
+          <ul className="similar-job-container">
             {similarJobs.map((eachJob) => (
-              <li key={eachJob.id}>
-                <img
-                  src={eachJob.companyLogoUrl}
-                  alt="similar job company logo"
-                />
-                <p>{eachJob.rating}</p>
-                <p>{eachJob.location}</p>
-                <p>{eachJob.jobDescription}</p>
-                <p>{eachJob.title}</p>
-                <p>{eachJob.employmentType}</p>
+              <li key={eachJob.id} className="similar-job-item">
+                <div className="single-job-1">
+                  <img
+                    src={eachJob.companyLogoUrl}
+                    alt="similar job company logo"
+                  />
+                  <div className="title-rating">
+                    <p>{eachJob.title}</p>
+                    <p>{eachJob.rating}</p>
+                  </div>
+                </div>
+                <div>
+                  <p>Description</p>
+                  <p>{eachJob.jobDescription}</p>
+                </div>
+                <div className="location-employment">
+                  <IoLocationSharp />
+                  <p>{eachJob.location}</p>
+                  <FaSuitcase />
+                  <p>{eachJob.employmentType}</p>
+                </div>
               </li>
             ))}
           </ul>
         </div>
-      </>
+      </section>
     );
   };
   failureView = () => (
-    <div>
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
-        alt="failure view"
-      />
-      <h1>Oops! Something Went Wrong</h1>
-      <p>We cannot seem to find the page you are looking for</p>
-      <button type="button" onClick={() => this.getJobItemDetails()}>
-        Retry
-      </button>
+    <div className="failure-image-container">
+      <div className="failure-image">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+          alt="failure view"
+        />
+        <h1>Opps! Something went Wrong</h1>
+        <button className="retryBtn" onClick={() => this.getJobItemDetails}>
+          Retry
+        </button>
+      </div>
     </div>
   );
   ShowViews = () => {
@@ -165,7 +219,12 @@ class JobItemDetails extends Component {
     }
   };
   render() {
-    return <div>{this.ShowViews()}</div>;
+    return (
+      <>
+        <Header />
+        <>{this.ShowViews()}</>
+      </>
+    );
   }
 }
 

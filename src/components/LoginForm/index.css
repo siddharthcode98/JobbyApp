@@ -1,0 +1,51 @@
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.form-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  background-color: #272727;
+  border-radius: 20px;
+  width: 40%;
+  height: 40%;
+  gap: 10px;
+}
+.form-element label {
+  color: #fff;
+  font-family: Montserrat;
+}
+.form-element input {
+  height: 10%;
+  border-radius: 10px;
+}
+.websiteLogo {
+  width: 30%;
+  align-self: center;
+}
+.login-button {
+  align-self: flex-start;
+  background-color: #6366f1;
+  color: #fff;
+  font-family: "Montserrat";
+  font-weight: bold;
+  border-radius: 8px;
+  border-style: none;
+  height: 30px;
+  width: 100px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+@media screen and (max-width: 576px) {
+  .form-element {
+    width: 80%;
+  }
+  .websiteLogo {
+    width: 50%;
+    align-self: center;
+  }
+}

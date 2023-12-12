@@ -1,4 +1,12 @@
 .profileContainer {
   background-image: url("https://assets.ccbp.in/frontend/react-js/profile-bg.png");
   background-size: cover;
+  border-radius: 10px;
+}
+.profileContainer h1 {
+  color: #4f46e5 !important;
+}
+.profileContainer p {
+  font-family: Montserrat;
+  color: black !important;
 }
